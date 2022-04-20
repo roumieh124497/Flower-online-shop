@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Your Search</title>
+    <link rel="stylesheet" href="/css/searchProduct.css" />
+    <link rel="stylesheet" href="/css/quantity.css" />
+    <link rel="icon" href="/images/logo.png" />
+  </head>
+  <body>
+    <header class="navbarHeader">
+      <nav>
+        <ul>
+          <li><a href="/home">Home</a></li>
+          <li><a href="/products">Products</a></li>
+        </ul>
+      </nav>
+    </header>
+    <% if(flowers && flowers.length > 0) { %>
+    <div class="tab-content">
+      <div id="flowers" data-tab-content class="active">
+        <div class="containerb">
+          <% for(let i = 0; i < flowers.length; i++){ %>
+
+          <form
+            class="card"
+            action="/place-order/flowers/<%= flowers[i]._id %>"
+            method="post"
+          >
+            <div class="imgBx">
+              <img
+                src="/upload/images/flowers/<%= flowers[i].uploadedFile %>"
+              />
+            </div>
+            <div class="contentb">
+              <div class="productName">
+                <h3><%= flowers[i].name %></h3>
+                <input
+                  type="text"
+                  name="type"
+                  value="flowers"
+                  style="display: none"
+                />
+                <div class="quantity buttons_added">
+                  <input type="button" value="-" class="minus" /><input
+                    type="number"
+                    step="1"
+                    min="1"
+                    max=""
+                    name="quantity"
+                    value="1"
+                    title="Qty"
+                    class="input-text qty text"
+                    size="4"
+                    pattern=""
+                    inputmode=""
+                  /><input type="button" value="+" class="plus" />
+                </div>
+              </div>
+              <div class="price_rating">
+                <h2><%= flowers[i].price %> AED</h2>
+                <div class="action_links">
+                  <ul>
+                    <li class="add_to_cart">
+                      <button type="submit">Add to Cart</button>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </form>
+          <% } %>
+        </div>
+      </div>
+    </div>
+    <% } else { %>
+    <h1 class="noItemH1">
+      There is no items with this name
+      <img
+        src="https://img.icons8.com/external-outline-juicy-fish/60/ffffff/external-empty-human-figures-outline-outline-juicy-fish.png"
+      />
+    </h1>
+    <% } %>
+
+    <div class="copyright_area">
+      <p>
+        Copyright &copy; 2022 <a href="/home">Hiscent Flower</a> All rights
+        Reserved.
+      </p>
+
+      <ul>
+        <li>
+          <a
+            href="https://www.instagram.com/hiscent_flower/"
+            target="_blank"
+            style="display: flex; align-items: center; justify-content: center"
+            ><img
+              width="25px"
+              height="25px"
+              src="https://img.icons8.com/ios-glyphs/30/ffffff/instagram-new.png"
+          /></a>
+        </li>
+        <li></li>
+        <li>
+          <a
+            href="https://wa.me/+971566723221"
+            target="_blank"
+            style="display: flex; align-items: center; justify-content: center"
+            ><img
+              width="25px"
+              height="25px"
+              src="https://img.icons8.com/fluency-systems-filled/48/ffffff/whatsapp.png"
+          /></a>
+        </li>
+      </ul>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="/js/quantity.js"></script>
+  </body>
+</html>

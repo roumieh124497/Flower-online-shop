@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up Page</title>
+
+    <link rel="stylesheet" href="/css/signupUser.css" />
+    <link rel="icon" href="/images/logo.png" />
+  </head>
+
+  <body>
+    <div class="container">
+      <h1
+        style="
+          color: #ffd700;
+          font-size: 30px;
+          margin-bottom: 10px;
+          font-family: 'Audiowide';
+        "
+      >
+        Hiscent Flower
+      </h1>
+      <h2 style="color: #ffd700; margin-bottom: 20px" id="signUpLe1">
+        Sign Up
+      </h2>
+      <% if(error) { %>
+      <div class="error-container">
+        <p><%= error %></p>
+      </div>
+      <% } %>
+      <form action="/auth/user-signup" method="post">
+        <div class="form-item-username">
+          <input
+            type="text"
+            name="name"
+            id="firstName"
+            placeholder="First Name"
+            required
+          />
+          <input
+            type="text"
+            name="surname"
+            id="lastName"
+            placeholder="Last Name"
+            required
+          />
+        </div>
+        <div class="form-item">
+          <input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="Email"
+            required
+          />
+        </div>
+        <div class="form-item">
+          <!-- add a password format display -->
+          <span class="pwd-format"> 8-15 AlphaNumeric Characters </span>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="Enter password"
+            required
+          />
+          <input
+            type="password"
+            name="confirmPassword"
+            id="confirmPassword"
+            placeholder="Confirm password"
+            required
+          />
+        </div>
+        <div class="form-btns">
+          <input type="submit" id="go" name="signup" value="Sign Up" />
+          <div class="options">
+            <span> Already have an account?</span>
+            <a href="/auth/user-login">Login here</a>
+          </div>
+        </div>
+      </form>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+    <script src="/js/languageSignup.js"></script>
+  </body>
+</html>

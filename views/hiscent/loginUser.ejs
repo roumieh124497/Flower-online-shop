@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login page</title>
+    <link rel="stylesheet" href="/css/loginUser.css" />
+    <link rel="icon" href="/images/logo.png" />
+  </head>
+  <body>
+    <div class="container">
+      <h1
+        style="
+          color: #ffd700;
+          font-size: 30px;
+          margin-bottom: 10px;
+          font-family: 'Audiowide';
+        "
+      >
+        Hiscent Flower
+      </h1>
+      <h2 id="loginLen" style="color: #ffd700; margin-bottom: 20px">Login</h2>
+      <% if(successMessage) { %>
+      <div class="success-container">
+        <p><%= successMessage %></p>
+      </div>
+      <% } %> <% if(message) { %>
+      <div class="error-container">
+        <p><%= message %></p>
+      </div>
+      <% } %>
+      <form action="/auth/user-login" method="post">
+        <div class="form-item-username"></div>
+        <div class="form-item">
+          <input
+            class="input-email"
+            type="email"
+            name="email"
+            id="email"
+            placeholder="Email"
+            required
+          />
+        </div>
+        <div class="form-item">
+          <!-- add a password format display -->
+          <span class="pwd-format"> 8-15 AlphaNumeric Characters </span>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="Enter password"
+            required
+          />
+          <a id="forgetLen" href="/reset-password" class="forget-password"
+            >Forget your password?</a
+          >
+        </div>
+        <div class="form-btns">
+          <input type="submit" id="go" value="Login" name="login" />
+          <div class="options">
+            <a id="signupHereLen" href="/auth/user-signup">SignUp here</a>
+          </div>
+        </div>
+      </form>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+    <script src="/js/languageLogin.js"></script>
+  </body>
+</html>

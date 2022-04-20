@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Confirm Order</title>
+    <link rel="stylesheet" href="/css/orderConfirm.css" />
+    <link rel="icon" href="/icons/dashboard-icon.png" />
+  </head>
+  <body>
+    <div class="purchase-container">
+      <h3 class="order-detail__header">Order Detail</h3>
+
+      <div class="orders-detail-container">
+        <h3>Purchases:</h3>
+        <div class="orders-container">
+          <% for(let i = 0; i < products.length; i++) { %>
+          <div class="order-container">
+            <div class="order-detail__container">
+              <h3>Product name: <%= products[i].name %></h3>
+              <p>Quantity: <%= products[i].quantity %></p>
+              <p>Price: <%= products[i].price %></p>
+              <% if(products[i].wrapper) { %>
+              <p>Wrapper: <%= products[i].wrapper %></p>
+              <% } %>
+            </div>
+            <img
+              src="/upload/images/<%= products[i].type %>/<%= products[i].image %>"
+              width="80px"
+              height="80px"
+            />
+          </div>
+          <hr style="width: 70%; margin: 12px auto 12px auto" />
+          <% } %>
+        </div>
+      </div>
+      <p>Address: <%= order.address %></p>
+      <p>Phone Number: <%= order.phoneNumber %></p>
+      <p>Order Feedback: <%= order.orderFeedback %></p>
+      <p style="color: rgb(102, 18, 18); font-size: 20px">
+        Online Pay: <%= order.isPaid %>
+      </p>
+      <p>Total Price with Delivery Fee: <%= total %> AED</p>
+      <p style="color: rgb(102, 18, 18); font-size: 20px">
+        Completed: <%= order.isCompleted %>
+      </p>
+      <p style="font-size: 20px">Date of delivery: <%= order.deliveryDate %></p>
+      <div class="btns">
+        <a href="/admin/deliver/<%= orderId %>">Deliver</a>
+
+        <a href="/admin/dashboard/orders">Cancel</a>
+      </div>
+    </div>
+  </body>
+</html>

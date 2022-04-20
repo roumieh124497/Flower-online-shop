@@ -1,0 +1,11 @@
+.content-table {
+  width: 60%;
+  height: 50vh;
+  margin: 180px auto 0 auto;
+  position: relative;
+}
+
+.edit-btns {
+  margin-left: 72%;
+  margin-bottom: 20px;
+}

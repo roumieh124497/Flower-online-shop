@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Complete Your Order</title>
+    <link rel="stylesheet" href="/css/placeOrder.css" />
+    <link rel="icon" href="/images/logo.png" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="headers-container">
+        <h1 id="paymentLen">Payment</h1>
+        <p id="paymentParaLen">
+          Please note that the money you pay is non refundable.
+        </p>
+      </div>
+      <div class="checkout_container">
+        <div class="checlout-product-total-container">
+          <h3>CHECKOUT</h3>
+          <hr />
+          <div class="Product--list__container">
+            <% for(let i = 0; i < products.length; i++) { %>
+            <div class="product-price-container">
+              <div class="product-container">
+                <h3><%= products[i].name %></h3>
+                <p>Quantity: <%= products[i].quantity %></p>
+              </div>
+              <h4><%= products[i].price %> AED</h4>
+            </div>
+            <% } %>
+          </div>
+          <hr />
+          <div class="total">
+            <h3 id="deliveryLen">Delivery fee</h3>
+            <p>30 AED</p>
+          </div>
+          <div class="total">
+            <h3 id="totalLen">total</h3>
+            <p><%= totalAmount %> AED</p>
+          </div>
+        </div>
+        <h5 id="maintenanceLen" style="color: rgb(245, 119, 119)">
+          Paying Online is not working now, it will work soon.
+        </h5>
+        <form
+          action="/checkout/confirm-order-online/<%= orderId %>"
+          method="POST"
+        >
+          <script
+            src="//checkout.stripe.com/v2/checkout.js"
+            class="stripe-button"
+            data-key="<%= key %>"
+            data-amount="<%= totalAmount * 100 %>"
+            data-currency="aed"
+            data-name="HISCENT SHOP"
+            data-description="Payment"
+            data-image="/images/marketplace.png"
+            data-locale="auto"
+          ></script>
+          <script>
+            //Hide default button
+            document.getElementsByClassName(
+              'stripe-button-el',
+            )[0].style.display = 'none';
+          </script>
+          <button type="submit" class="pay-button" id="payOnlineLen">
+            Pay Online
+          </button>
+        </form>
+        <form class="btns">
+          <a
+            class="btn"
+            href="/checkout/confirm-order/<%= orderId %>"
+            id="cashOnDeliveryLen"
+            >Cash On Delivery</a
+          >
+          <a href="/checkout/cancel/<%= orderId %>" id="cancelPaymentLen"
+            >Cancel</a
+          >
+        </form>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+    <script src="/js/checkoutLanguage.js"></script>
+  </body>
+</html>

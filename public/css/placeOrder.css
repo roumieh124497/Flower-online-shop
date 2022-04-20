@@ -1,0 +1,166 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #242424;
+  font-family: 'Poppins', sans-serif;
+  color: white;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+  margin-top: 40px;
+}
+
+.headers-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+.headers-container h1 {
+  color: #ffd700;
+}
+
+.stripe-button-el span {
+  display: none;
+}
+
+.checkout_container {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  width: 450px;
+  background-color: #5f5d5d;
+  padding: 25px;
+  border-top: 2px solid #ffd700;
+}
+
+.checlout-product-total-container {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.Product--list__container {
+  height: 80px;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.Product--list__container::-webkit-scrollbar {
+  width: 12px; /* width of the entire scrollbar */
+}
+
+.Product--list__container::-webkit-scrollbar-track {
+  background: #5f5d5d; /* color of the tracking area */
+}
+
+.Product--list__container::-webkit-scrollbar-thumb {
+  background-color: #ffdc34; /* color of the scroll thumb */
+  border-radius: 20px; /* roundness of the scroll thumb */
+  border: 3px solid #242424; /* creates padding around scroll thumb */
+}
+
+.product-price-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.total {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.btns {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+
+.btns .btn {
+  padding: 10px;
+  border-radius: 5px;
+  border: 2px solid #ffd700;
+  background-color: #5f5d5d;
+  color: white;
+  cursor: pointer;
+}
+
+.pay-button {
+  padding: 10px;
+  border-radius: 5px;
+  border: 2px solid #ffd700;
+  background-color: #5f5d5d;
+  color: white;
+  cursor: pointer;
+}
+
+.pay-button:hover {
+  background-color: #ffd700;
+}
+.btns .btn:hover {
+  background-color: #ffd700;
+}
+.btns a {
+  padding: 5.5px;
+  border-radius: 5px;
+  border: 2px solid rgb(250, 100, 100);
+  background-color: #5f5d5d;
+  color: white;
+  text-decoration: none;
+}
+.btns a:hover {
+  background-color: rgb(247, 89, 89);
+}
+
+@media screen and (max-width: 485px) {
+  .checkout_container {
+    width: 400px;
+  }
+  .headers-container p {
+    width: 300px;
+  }
+}
+@media screen and (max-width: 429px) {
+  .checkout_container {
+    width: 350px;
+  }
+  .headers-container p {
+    width: 300px;
+  }
+  .btns .btn {
+    font-size: 10px;
+  }
+  .btns a {
+    font-size: 10px;
+  }
+}
+@media screen and (max-width: 356px) {
+  .checkout_container {
+    width: 300px;
+  }
+  .headers-container p {
+    width: 300px;
+  }
+  .btns .btn {
+    font-size: 8px;
+  }
+  .btns a {
+    font-size: 8px;
+  }
+}

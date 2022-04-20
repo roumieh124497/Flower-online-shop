@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hiscent - Flower - home</title>
+    <link rel="icon" href="/images/logo.png" />
+
+    <!-- CSS links -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"
+    />
+
+    <link rel="stylesheet" href="/css/homePage.css" />
+    <link rel="stylesheet" href="/css/quantity.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/native-toast@2.0.0/dist/native-toast.css"
+    />
+  </head>
+  <body>
+    <!-- <div class="home_black_version"> -->
+    <header class="header_area header_black">
+      <!-- top  header  -->
+      <div class="header_top">
+        <div class="container">
+          <div class="row align-items-center left-container">
+            <div class="col-lg-6 col-md-6"></div>
+            <div class="col-lg-6 col-md-6">
+              <div class="top_right text-right">
+                <ul>
+                  <li class="language">
+                    <a class="englishLanguage" href="#en"
+                      >English <i class="ion-chevron-down"></i
+                    ></a>
+                    <ul class="dropdown_language">
+                      <li><a class="arabicLanguage" href="#ar">Arabic</a></li>
+                    </ul>
+                  </li>
+                  <% if(user) { %>
+                  <li class="top_links">
+                    <%= user.name %> <%= user.surname %>
+                    <i class="ion-chevron-down"> </i>
+                    <ul class="dropdown_links">
+                      <li><a id="settingLe" href="/setting">Settings</a></li>
+                      <li>
+                        <a id="logoutLe" href="/auth/user-logout">Log out</a>
+                      </li>
+                    </ul>
+                  </li>
+
+                  <% } else { %>
+                  <li class="top_links">
+                    <a href="/auth/user-signup"
+                      ><span id="signUpLe1">Sign Up</span>
+                      <i class="ion-chevron-down"></i
+                    ></a>
+                    <ul class="dropdown_links">
+                      <li>
+                        <a id="signUpLe2" href="/auth/user-signup">Sign up</a>
+                      </li>
+                      <li><a id="loginLe" href="/auth/user-login">Login</a></li>
+                    </ul>
+                  </li>
+
+                  <% } %>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--  top header ends -->
+
+      <!-- header middle  -->
+      <div class="header_middel">
+        <div class="container">
+          <div class="row align-items-center">
+            <div class="col-lg-2 col-md-3 col-4">
+              <div class="logo">
+                <a href="/home"><img src="/images/logo.png" alt="" /></a>
+              </div>
+            </div>
+
+            <div class="col-lg-5 col-md-7 col-6">
+              <div class="middel_right">
+                <div class="search_btn">
+                  <a href="#"
+                    ><img
+                      src="https://img.icons8.com/material-sharp/24/ffffff/search.png"
+                  /></a>
+                  <div class="dropdown_search">
+                    <form action="/home" method="GET">
+                      <label id="searchLabelLen" for="search"
+                        >Search a flowers in English</label
+                      >
+                      <input
+                        id="search"
+                        type="text"
+                        placeholder="Search...."
+                        name="search"
+                      />
+                      <button type="submit">
+                        <img
+                          src="https://img.icons8.com/material-sharp/24/ffffff/search.png"
+                        />
+                      </button>
+                    </form>
+                  </div>
+                </div>
+
+                <div class="cart_link">
+                  <% if (numberOfItemsInCard > 0) { %>
+                  <div class="number-items__card">
+                    <%= numberOfItemsInCard %>
+                  </div>
+                  <% } %>
+                  <a href="#"
+                    ><img
+                      width="25px"
+                      height="25px"
+                      src="https://img.icons8.com/external-those-icons-fill-those-icons/48/ffffff/external-cart-shopping-actions-those-icons-fill-those-icons-8.png"
+                    />
+
+                    <img
+                      src="https://img.icons8.com/material-rounded/24/ffffff/expand-arrow--v1.png"
+                    />
+                  </a>
+
+                  <!-- Inside shopping cart -->
+                  <form
+                    class="mini_cart <%= openCart %>"
+                    action="/place-order"
+                    method="post"
+                  >
+                    <% if(cartEmpty){ %>
+                    <div class="alert alert-danger" role="alert">
+                      <%= cartEmpty %>
+                    </div>
+                    <% } %>
+                    <div class="cart_close">
+                      <div class="cart_text">
+                        <h3 id="cartLen">Cart</h3>
+                      </div>
+                      <div class="mini_cart_close">
+                        <a href="javascript:void(0)"
+                          ><img
+                            src="https://img.icons8.com/external-tanah-basah-detailed-outline-tanah-basah/48/ffffff/external-cross-user-interface-tanah-basah-detailed-outline-tanah-basah.png"
+                        /></a>
+                      </div>
+                    </div>
+
+                    <% for(let i = 0; i < carts.length; i++) { %>
+                    <div class="cart_item">
+                      <div class="cart_img">
+                        <a href="#"
+                          ><img
+                            src="/upload/images/<%= carts[i].types %>/<%= carts[i].image %>"
+                            alt=""
+                        /></a>
+                      </div>
+                      <input
+                        type="hidden"
+                        name="productId"
+                        value="<%= carts[i]._id %>"
+                      />
+                      <div class="cart_info">
+                        <a href="#"><%= carts[i].name %></a>
+                        <div class="quantity buttons_added">
+                          <input
+                            type="button"
+                            value="-"
+                            class="minus"
+                            disabled
+                          /><input
+                            type="number"
+                            step="1"
+                            min="1"
+                            max=""
+                            name=""
+                            value="<%= carts[i].quantity %>"
+                            title="Qty"
+                            class="input-text qty text"
+                            size="4"
+                            pattern=""
+                            inputmode=""
+                            disabled
+                          /><input
+                            type="button"
+                            value="+"
+                            class="plus"
+                            disabled
+                          />
+                        </div>
+                        <span class="price_cart"><%=carts[i].price %> AED</span>
+                        <% if(carts[i].types === 'flowers'){ %>
+                        <label id="wrapperLen" for="wrapper"
+                          >Rose Wrap color</label
+                        >
+                        <br />
+                        <input
+                          id="wrapper"
+                          type="text"
+                          name="wrapper"
+                          style="
+                            width: 70px;
+                            border-radius: 7px;
+                            border-style: none;
+                          "
+                        />
+                        <% } %>
+                      </div>
+
+                      <div class="cart_remove">
+                        <a href="/delete-order/<%= carts[i]._id %>"
+                          ><img
+                            width="28px"
+                            height="28px"
+                            src="https://img.icons8.com/external-tanah-basah-detailed-outline-tanah-basah/48/ffffff/external-cross-user-interface-tanah-basah-detailed-outline-tanah-basah.png"
+                        /></a>
+                      </div>
+                    </div>
+
+                    <% } %>
+
+                    <div class="cart_total">
+                      <span id="totalLen">Total : </span>
+                      <span><%= total %> AED</span>
+                      <input
+                        type="hidden"
+                        name="totalAmount"
+                        value="<%= total %>"
+                      />
+                    </div>
+                    <hr />
+                    <div class="container cart-inputs__container">
+                      <p id="cartFilledLen">
+                        Please Fill the following fields:
+                      </p>
+                      <input
+                        class="inputPhone"
+                        type="text"
+                        placeholder="Your phone number"
+                        name="phoneNumber"
+                        required
+                      />
+                      <textarea
+                        name="address"
+                        cols="30"
+                        rows="10"
+                        placeholder="Your Address"
+                        required
+                      ></textarea>
+                      <textarea
+                        name="orderFeedBack"
+                        id=""
+                        cols="30"
+                        rows="10"
+                        placeholder="Your order feedback"
+                      ></textarea>
+                      <label
+                        for="date"
+                        style="color: white"
+                        id="deliveryTimeLen"
+                        >Delivery Time</label
+                      >
+                      <input
+                        class="dateInput"
+                        type="datetime-local"
+                        name="date"
+                        id="date"
+                      />
+                    </div>
+                    <div class="mini_cart_footer">
+                      <div class="cart_button checkout">
+                        <button
+                          href="#"
+                          class="active"
+                          type="submit"
+                          id="checkoutLen"
+                        >
+                          Checkout
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                  <!-- Inside shopping cart ends  -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- header middle ends -->
+
+      <!-- header bottom  -->
+
+      <div class="header_bottom sticky-header">
+        <div class="container">
+          <div class="row align-items-center">
+            <div class="col-12">
+              <div class="main_menu_inner">
+                <div class="logo_sticky">
+                  <a href="/home"><img src="/images/logo.png" alt="logo" /></a>
+                </div>
+                <div class="main_menu">
+                  <nav>
+                    <ul>
+                      <li class="active">
+                        <a id="homeLen" href="/home">Home </a>
+                        <!-- <i class="ion-chevron-down"></i> -->
+                      </li>
+                      <li>
+                        <a id="productLen1" href="/products"
+                          >Products<i class="ion-chevron-down"></i
+                        ></a>
+                      </li>
+                      <li>
+                        <a id="bestSellerLen" class="bestSellerHref" href="#"
+                          >Best Sellers</a
+                        >
+                        <!-- <i class="ion-chevron-down"></i> -->
+                      </li>
+
+                      <li>
+                        <a id="aboutLen" class="aboutHref" href="#">About Us</a>
+                      </li>
+                      <li>
+                        <a id="contactLen" class="contactHref" href="#"
+                          >Contact</a
+                        >
+                      </li>
+                    </ul>
+                  </nav>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- header bottom ends -->
+    </header>
+
+    <!-- animation pictures sliders-->
+    <div class="slider_area slider_black owl-carousel">
+      <div class="single_slider" data-bgimg="/images/slider/3.jpeg">
+        <div class="container">
+          <div class="row align-items-center">
+            <div class="col-12">
+              <div class="slider_content">
+                <p>FRESH FLOWER BOUQUETS TO FALL FOR</p>
+
+                <a
+                  id="shopLen1"
+                  href="/products"
+                  class="button"
+                  style="font-size: 18px"
+                  >Shop Now</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="single_slider" data-bgimg="/images/slider/1.jpeg">
+        <div class="container">
+          <div class="row align-items-center">
+            <div class="col-12">
+              <div class="slider_content">
+                <p>CELEBRATE BIRTHDAY IN STYLE !</p>
+                <p class="slider_price">FOR HER | FOR HIM | FOR KIDS</p>
+                <a
+                  id="shopLen2"
+                  href="/products"
+                  class="button"
+                  style="font-size: 18px"
+                  >Shop Now</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="single_slider" data-bgimg="/images/slider/2.jpeg">
+        <div class="container">
+          <div class="row align-items-center">
+            <div class="col-12">
+              <div class="slider_content">
+                <h1>ANNIVERSARY GIFTS</h1>
+
+                <p class="slider_price">
+                  <span>Now from Hiscent Flower.</span>
+                </p>
+                <a
+                  id="shopLen3"
+                  href="/products"
+                  class="button"
+                  style="font-size: 18px"
+                  >Shop Now</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- animation ends -->
+
+    <!-- About us -->
+    <div class="about-container">
+      <section class="about">
+        <div class="image">
+          <img src="/images/aboutpic.png" alt="About" />
+        </div>
+
+        <div class="content">
+          <h2 id="aboutLen2">About Us</h2>
+          <span><!-- line here --></span>
+          <p id="aboutTextLen">
+            Hiscent Flower is a brand new flower shop in Abu Dhabi, United
+            Emirates. We open our door since 2021 our main goal is to provide a
+            high quality flowers to our customers to make them happy because we
+            always believes that customers should always be happy with a nice
+            bouquet of flower.
+          </p>
+          <ul class="links">
+            <li><a id="productLen2" href="/products">Products</a></li>
+            <div class="vertical-line"></div>
+            <li class="contactHref">
+              <a id="bestSellerLen1" href="#">Best Products</a>
+            </li>
+          </ul>
+          <ul class="icons">
+            <li>
+              <i class="fa fa-twitter"></i>
+            </li>
+            <li>
+              <i class="fa fa-facebook"></i>
+            </li>
+            <li>
+              <i class="fa fa-github"></i>
+            </li>
+            <li>
+              <i class="fa fa-pinterest"></i>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- About us ends  -->
+
+      <!-- shop pic -->
+      <section class="banner_fullwidth black_fullwidth">
+        <div class="container">
+          <div class="row align-items-center">
+            <div class="col-12">
+              <div class="banner_text">
+                <h2>Hiscent Flower</h2>
+                <span id="bestFlowerLen"
+                  >One of the best shop in Abu Dhabi.</span
+                >
+                <a id="shopLen4" href="/products">Shop Now</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- shop pic -->
+    </div>
+    <!-- Best selling  -->
+    <section class="best">
+      <h2 id="bestSellerLen2">Best Sellers</h2>
+      <ul class="tabs">
+        <li id="flowersLen" data-tab-target="#flowers" class="active tab">
+          Flowers
+        </li>
+        <li id="bouquetsLen" data-tab-target="#bouquets" class="tab">
+          Bouquets
+        </li>
+        <li id="vasesLen" data-tab-target="#vases" class="tab">Vases</li>
+      </ul>
+      <div class="tab-content">
+        <div id="flowers" data-tab-content class="active">
+          <div class="containerb">
+            <% for(let i = 0; i < flowers.length; i++){ %>
+            <form
+              class="card"
+              action="/place-order/flowers/<%= flowers[i]._id %>"
+              method="post"
+            >
+              <div class="imgBx">
+                <img
+                  src="/upload/images/flowers/<%= flowers[i].uploadedFile %>"
+                />
+              </div>
+              <div class="contentb">
+                <div class="productName">
+                  <h3><%= flowers[i].name %></h3>
+                  <input
+                    type="text"
+                    name="type"
+                    value="flowers"
+                    style="display: none"
+                  />
+                  <div class="quantity buttons_added">
+                    <input type="button" value="-" class="minus" /><input
+                      type="number"
+                      step="1"
+                      min="1"
+                      max=""
+                      name="quantity"
+                      value="1"
+                      title="Qty"
+                      class="input-text qty text"
+                      size="4"
+                      pattern=""
+                      inputmode=""
+                    /><input type="button" value="+" class="plus" />
+                  </div>
+                </div>
+                <div class="price_rating">
+                  <h2><%= flowers[i].price %> AED</h2>
+                  <div class="action_links">
+                    <ul>
+                      <li class="add_to_cart">
+                        <button class="addToCartLen" type="submit">
+                          Add to Cart
+                        </button>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </form>
+            <% } %>
+          </div>
+        </div>
+
+        <div id="bouquets" data-tab-content>
+          <div class="containerb">
+            <% for(let i = 0; i < bouquets.length; i++){ %>
+            <form
+              class="card"
+              action="/place-order/bouquets/<%= bouquets[i]._id %>"
+              method="post"
+            >
+              <div class="imgBx">
+                <img
+                  src="/upload/images/bouquets/<%= bouquets[i].uploadedFile %>"
+                />
+              </div>
+              <div class="contentb">
+                <div class="productName">
+                  <h3><%= bouquets[i].name %></h3>
+                  <input
+                    type="text"
+                    value="bouquets"
+                    name="type"
+                    style="display: none"
+                  />
+                  <div class="quantity buttons_added">
+                    <input type="button" value="-" class="minus" /><input
+                      type="number"
+                      step="1"
+                      min="1"
+                      max=""
+                      name="quantity"
+                      value="1"
+                      title="Qty"
+                      class="input-text qty text"
+                      size="4"
+                      pattern=""
+                      inputmode=""
+                    /><input type="button" value="+" class="plus" />
+                  </div>
+                </div>
+                <div class="price_rating">
+                  <h2><%= bouquets[i].price %> AED</h2>
+                  <div class="action_links">
+                    <ul>
+                      <li class="add_to_cart">
+                        <button
+                          class="addToCartLen"
+                          type="submit"
+                          title="Add to Cart"
+                        >
+                          Add to Cart
+                        </button>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </form>
+            <% } %>
+          </div>
+        </div>
+        <div id="vases" data-tab-content>
+          <div class="containerb">
+            <% for(let i = 0; i < bouquets.length; i++){ %>
+            <form
+              class="card"
+              action="/place-order/vases/<%= vases[i]?._id %>"
+              method="post"
+            >
+              <div class="imgBx">
+                <img src="/upload/images/vases/<%= vases[i]?.uploadedFile %>" />
+              </div>
+              <input
+                type="text"
+                value="vases"
+                name="type"
+                style="display: none"
+              />
+              <div class="contentb">
+                <div class="productName">
+                  <h3><%= vases[i]?.name %></h3>
+                  <div class="quantity buttons_added">
+                    <input type="button" value="-" class="minus" /><input
+                      type="number"
+                      step="1"
+                      min="1"
+                      max=""
+                      name="quantity"
+                      value="1"
+                      title="Qty"
+                      class="input-text qty text"
+                      size="4"
+                      pattern=""
+                      inputmode=""
+                    /><input type="button" value="+" class="plus" />
+                  </div>
+                </div>
+                <div class="price_rating">
+                  <h2><%= vases[i]?.price %> AED</h2>
+                  <div class="action_links">
+                    <ul>
+                      <li class="add_to_cart">
+                        <button
+                          class="addToCartLen"
+                          type="submit"
+                          title="Add to Cart"
+                        >
+                          Add to Cart
+                        </button>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </form>
+            <% } %>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Best selling ends  -->
+
+    <!-- Contact Us -->
+    <div class="contact">
+      <div class="formBx">
+        <form>
+          <h3 id="contactLen1">Contact Us</h3>
+          <input
+            id="nameEmail"
+            type="text"
+            name="name"
+            placeholder="Full Name"
+          />
+          <input
+            id="emailEmail"
+            type="email"
+            name="email"
+            placeholder="Email"
+          />
+          <textarea
+            id="messageEmail"
+            placeholder="Your Message"
+            name="message"
+          ></textarea>
+          <input
+            type="button"
+            name="sendButton"
+            value="Send"
+            class="sendEmail"
+          />
+        </form>
+      </div>
+    </div>
+    <!-- Contact Us end -->
+
+    <!-- footer section  -->
+    <footer class="footer_widgets footer_black">
+      <div class="container">
+        <div class="footer_top">
+          <div class="row">
+            <div class="col-lg-4 col-md-6 col-sm-8">
+              <div class="widgets_container contact_us">
+                <h3 id="informationLen">Hiscent Flower Location</h3>
+                <div class="footer_contact">
+                  <p id="locationLen">
+                    Address : Abu Dhabi - Ghiyathi - AL Dahfra Co-Operative
+                    Society - First floor.
+                  </p>
+                  <p>
+                    Phone : <a href="tel:(+971)566723221">(+971)566723221</a>
+                  </p>
+                  <p>Email : hiscent124497@gmail.com</p>
+                  <ul>
+                    <li>
+                      <a
+                        href="https://www.instagram.com/hiscent_flower/"
+                        target="_blank"
+                        style="
+                          display: flex;
+                          align-items: center;
+                          justify-content: center;
+                        "
+                        ><img
+                          width="25px"
+                          height="25px"
+                          src="https://img.icons8.com/ios-glyphs/30/ffffff/instagram-new.png"
+                      /></a>
+                    </li>
+
+                    <li>
+                      <a
+                        href="https://wa.me/+971566723221"
+                        target="_blank"
+                        style="
+                          display: flex;
+                          align-items: center;
+                          justify-content: center;
+                        "
+                        ><img
+                          width="25px"
+                          height="25px"
+                          src="https://img.icons8.com/fluency-systems-filled/48/ffffff/whatsapp.png"
+                      /></a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-2 col-md-6 col-sm-4 col-6">
+              <div class="widgets_container widget_menu">
+                <h3 id="quickLinkLen">Quick Links</h3>
+                <div class="footer_menu">
+                  <ul>
+                    <li><a id="homeLen1" href="/home">Home</a></li>
+                    <li><a id="productLen3" href="/products">Products</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-2 col-md-6 col-sm-5 col-6">
+              <div class="widgets_container widget_menu">
+                <h3 id="openingHoursLen">Opening Hours</h3>
+                <div class="footer_menu">
+                  <ul>
+                    <li>
+                      <a id="dayhourLen" href="#">Sun-Sat: 10am - 10pm</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="footer_bottom">
+          <div class="row">
+            <div class="col-12">
+              <div class="copyright_area">
+                <p>
+                  Copyright &copy; 2022 <a href="#">Hiscent Flower</a> All
+                  rights Reserved.
+                </p>
+
+                <ul>
+                  <li>
+                    <a
+                      href="https://www.instagram.com/hiscent_flower/"
+                      target="_blank"
+                      style="
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                      "
+                      ><img
+                        width="25px"
+                        height="25px"
+                        src="https://img.icons8.com/ios-glyphs/30/ffffff/instagram-new.png"
+                    /></a>
+                  </li>
+
+                  <li>
+                    <a
+                      href="https://wa.me/+971566723221"
+                      target="_blank"
+                      style="
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                      "
+                      ><img
+                        width="25px"
+                        height="25px"
+                        src="https://img.icons8.com/fluency-systems-filled/48/ffffff/whatsapp.png"
+                    /></a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <script></script>
+    <!-- footer section ends -->
+    <!-- </div> -->
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <!-- JavaScript Bundle with Popper.js -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+    <script src="https://unpkg.com/native-toast@2.0.0/dist/native-toast.min.js"></script>
+    <script src="/js/language.js"></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"
+    ></script>
+    <script type="text/javascript">
+      (function () {
+        emailjs.init('F1x9I8UNx1BaQAx-1');
+      })();
+    </script>
+    <script src="/js/quantity.js"></script>
+
+    <script src="/js/main2.js"></script>
+    <script src="/js/email.js"></script>
+
+    <% if(successOrder) { %>
+    <script>
+      nativeToast({
+        message: 'We received your order successfully',
+        position: 'north',
+        // Self destroy in 5 seconds
+        timeout: 6000,
+        type: 'success',
+        closeOnClick: true,
+      });
+    </script>
+    <% } %>
+
+    <!-- inline javascript for language -->
+  </body>
+</html>

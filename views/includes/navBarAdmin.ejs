@@ -1,0 +1,101 @@
+<header class="header" id="header">
+  <div class="header_toggle"><i class="bx bx-menu" id="header-toggle"></i></div>
+  <div class="header_title"><p>Hiscent Management System</p></div>
+  <div class="header_button">
+    <!-- Example single danger button -->
+    <div class="order-button__container" style="display: inline-block">
+      <% if(numberOfOrder > 0) { %>
+      <span><%= numberOfOrder %></span>
+      <% } %>
+      <a href="/admin/dashboard/orders" class="btn btn-dark">Orders</a>
+    </div>
+    <div class="btn-group">
+      <button
+        class="btn btn-info dropdown-toggle"
+        type="button"
+        id="dropdownMenuClickableInside"
+        data-bs-toggle="dropdown"
+        data-bs-auto-close="outside"
+        aria-expanded="false"
+      >
+        Mohamad Roumieh
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuClickableInside">
+        <li><a class="dropdown-item" href="/auth/admin-logout">SignOut</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<div class="l-navbar" id="nav-bar">
+  <nav class="nav">
+    <div>
+      <a href="/home" class="nav_logo">
+        <i class="bx bx-layer nav_logo-icon"></i>
+        <span class="nav_logo-name">Hiscent Flower</span>
+      </a>
+      <div class="nav_list">
+        <a href="/admin/dashboard" class="nav_link">
+          <i class="bx bx-grid-alt nav_icon"></i>
+          <span class="nav_name">Dashboard</span></a
+        >
+        <a href="/admin/dashboard/flowers/new" class="nav_link"
+          ><i class="bi bi-flower2"></i>
+          <span class="nav_name">Add flower</span>
+        </a>
+        <a href="/admin/dashboard/bouquets/new" class="nav_link">
+          <i class="bi bi-flower3"></i>
+          <span class="nav_name">Add bouquet</span>
+        </a>
+        <a href="/admin/dashboard/vases/new" class="nav_link">
+          <i class="bi bi-basket"></i> <span class="nav_name">Add vase</span>
+        </a>
+        <a href="/admin/dashboard/covers/new" class="nav_link">
+          <i class="bi bi-plus-circle"></i>
+          <span class="nav_name">Add flower Cover</span>
+        </a>
+      </div>
+    </div>
+    <a href="/auth/admin-logout" class="nav_link">
+      <i class="bx bx-log-out nav_icon"></i>
+      <span class="nav_name">SignOut</span>
+    </a>
+  </nav>
+</div>
+<!-- <script>
+  document.addEventListener('DOMContentLoaded', function (event) {
+    const showNavbar = (toggleId, navId, bodyId, headerId) => {
+      const toggle = document.getElementById(toggleId),
+        nav = document.getElementById(navId),
+        bodypd = document.getElementById(bodyId),
+        headerpd = document.getElementById(headerId);
+
+      // Validate that all variables exist
+      if (toggle && nav && bodypd && headerpd) {
+        toggle.addEventListener('click', () => {
+          // show navbar
+          nav.classList.toggle('show');
+          // change icon
+          toggle.classList.toggle('bx-x');
+          // add padding to body
+          bodypd.classList.toggle('body-pd');
+          // add padding to header
+          headerpd.classList.toggle('body-pd');
+        });
+      }
+    };
+
+    showNavbar('header-toggle', 'nav-bar', 'body-pd', 'header');
+
+    /*===== LINK ACTIVE =====*/
+    const linkColor = document.querySelectorAll('.nav_link');
+
+    function colorLink() {
+      if (linkColor) {
+        linkColor.forEach(l => l.classList.remove('active'));
+        this.classList.add('active');
+      }
+    }
+    linkColor.forEach(l => l.addEventListener('click', colorLink));
+  
+  });
+</script> -->
